@@ -1,0 +1,438 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #fff;
+  color: #000;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 20px;
+}
+/* Widen container to accommodate long timezone names and timeline */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  border: 4px solid #000;
+  padding: 20px;
+}
+header {
+  border-bottom: 4px solid #000;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header p {
+  font-size: 1rem;
+}
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+input[type="text"],
+button {
+  width: 100%;
+  border: 4px solid #000;
+  padding: 10px;
+  font-size: 1rem;
+  background: transparent;
+  color: #000;
+  font-family: inherit;
+}
+/* Ensure autocomplete dropdown positions correctly */
+.input-section,
+.timezone-section {
+  position: relative;
+  margin-bottom: 20px;
+}
+button {
+  margin-top: 10px;
+  cursor: pointer;
+}
+button:hover {
+  background: #000;
+  color: #fff;
+}
+.reset-btn {
+  margin-top: 10px;
+  border: 4px solid #000;
+  background: transparent;
+  color: #000;
+  font-family: inherit;
+}
+.theme-toggle-btn {
+  width: auto;
+  margin-left: 10px;
+  border: 2px solid #000;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  background: transparent;
+  color: #000;
+  font-family: inherit;
+}
+.tz-note,
+.copy-note {
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+.copy-note {
+  color: #666;
+  font-style: italic;
+}
+body.dark .copy-note {
+  color: #aaa;
+}
+.time-range-section {
+  margin-bottom: 20px;
+}
+.time-range-section > label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.time-range-inputs {
+  display: flex;
+  gap: 15px;
+  align-items: end;
+}
+.input-group {
+  flex: 1;
+}
+.input-group label {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+.input-group input[type="number"] {
+  width: 100%;
+  border: 4px solid #000;
+  padding: 8px;
+  font-size: 1rem;
+  background: transparent;
+  color: #000;
+  font-family: inherit;
+  margin: 0;
+}
+.results-section {
+  margin-top: 20px;
+  border-top: 4px solid #000;
+  padding-top: 10px;
+  display: none;
+}
+body.dark .results-section {
+  border-color: #fff;
+}
+.result-item {
+  margin-bottom: 20px;
+}
+.result-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+.result-item p {
+  padding: 10px;
+  border: 4px solid #000;
+  background: #fff;
+}
+/* Copy button styling */
+.copy-btn {
+  display: inline-block;
+  margin-top: 5px;
+  width: auto;
+  padding: 5px 10px;
+  border: 4px solid #000;
+  background: transparent;
+  color: #000;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+.copy-btn:hover {
+  background: #000;
+  color: #fff;
+}
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 4px solid #000;
+  background: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+.autocomplete-item {
+  padding: 8px;
+  white-space: nowrap;
+}
+.autocomplete-item:hover,
+.autocomplete-item.selected {
+  background: #000;
+  color: #fff;
+}
+/* Timezone tag list */
+.timezone-list {
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+/* Format selection buttons */
+.format-section {
+  margin: 20px 0;
+}
+.format-section label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.format-section fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.format-section legend {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-family: 'Courier New', Courier, monospace;
+  color: #000;
+}
+.fmt-btn {
+  border: 4px solid #000;
+  background: transparent;
+  color: #000;
+  padding: 6px 12px;
+  margin-right: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+.fmt-btn:hover,
+.fmt-btn.selected {
+  background: #000;
+  color: #fff;
+}
+/* Convert button distinct style */
+button.convert-btn {
+  background: #000;
+  color: #fff;
+  border: 4px solid #000;
+}
+button.convert-btn:hover {
+  background: transparent;
+  color: #000;
+}
+.tz-tag {
+  display: inline-block;
+  border: 4px solid #000;
+  padding: 6px 10px;
+  margin: 2px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: transparent;
+  cursor: pointer;
+}
+.tz-tag:hover {
+  background: #000 !important;
+  color: #fff !important;
+}
+/* Conversion results list spacing */
+.conversion-list .result-item {
+  margin-top: 15px;
+}
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 20px;
+    padding: 15px;
+  }
+  header h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Timeline visualization */
+.timeline {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+.timeline-row {
+  display: flex;
+  align-items: center;
+  /* Increase spacing so hour labels don’t overlap next row */
+  margin-bottom: 24px;
+}
+.tz-label {
+  width: 200px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+.timeline-hours {
+  display: flex;
+}
+.hour-block {
+  width: 20px;
+  height: 40px;
+  border-left: 2px solid #000;
+  position: relative;
+}
+body.dark .hour-block {
+  border-left: 2px solid #fff;
+}
+.hour-block:first-child {
+  border-left: none;
+}
+.hour-block::after {
+  content: attr(data-hour);
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+}
+.result-value {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 6px;
+}
+/* Ensure result text fills space and button matches height */
+.result-value p {
+  flex: 1;
+  margin: 0;
+}
+.result-value .copy-btn {
+  flex: 0 0 auto;
+  margin-top: 0;
+  /* Match the height of the text box by stretching and applying same vertical padding */
+  align-self: stretch;
+  padding: 10px;
+  border: 4px solid #000;
+  line-height: 1;
+}
+
+/* Dark mode styles */
+body.dark {
+  background: #000;
+  color: #fff;
+}
+body.dark .container,
+body.dark header {
+  border-color: #fff;
+}
+body.dark input[type="text"],
+body.dark input[type="number"],
+body.dark button,
+body.dark .reset-btn,
+body.dark .theme-toggle-btn,
+body.dark .fmt-btn,
+body.dark .tz-tag,
+body.dark .copy-btn,
+body.dark .autocomplete-dropdown,
+body.dark .result-item p {
+  background: #333;
+  color: #fff;
+  border-color: #fff;
+}
+body.dark button:hover,
+body.dark .fmt-btn:hover,
+body.dark .fmt-btn.selected,
+body.dark .reset-btn:hover,
+body.dark .tz-tag:hover,
+body.dark .copy-btn:hover,
+body.dark .theme-toggle-btn:hover,
+body.dark .autocomplete-item:hover,
+body.dark .autocomplete-item.selected {
+  background: #fff;
+  color: #000;
+}
+body.dark button.convert-btn {
+  background: #fff;
+  color: #000;
+}
+body.dark button.convert-btn:hover {
+  background: #333;
+  color: #fff;
+}
+
+/* Offset table styling */
+.results-table-container {
+  margin: 20px 0;
+  padding: 0;
+}
+.results-table-container .offset-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 4px solid #000;
+  font-family: 'Courier New', Courier, monospace;
+  table-layout: auto;
+}
+.offset-table th,
+.offset-table td {
+  border: 4px solid #000;
+  padding: 8px 4px;
+  text-align: center;
+  font-size: 0.8rem;
+  background: transparent;
+  color: #000;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.2;
+  width: 120px;
+  max-width: 120px;
+}
+.offset-table td:not(.first-column) {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.offset-table td:not(.first-column):hover {
+  background-color: #f0f0f0;
+}
+.offset-table th {
+  background: #000;
+  color: #fff;
+  font-weight: bold;
+}
+.offset-table th:first-child,
+.offset-table td:first-child {
+  width: 80px;
+  max-width: 80px;
+  text-align: center;
+  font-weight: bold;
+}
+body.dark .results-table-container .offset-table {
+  border-color: #fff;
+}
+body.dark .offset-table th,
+body.dark .offset-table td {
+  border-color: #fff;
+  color: #fff;
+}
+body.dark .offset-table th {
+  background: #fff;
+  color: #000;
+}
+body.dark .offset-table td:not(.first-column):hover {
+  background-color: #444;
+}

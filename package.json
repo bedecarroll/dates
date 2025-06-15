@@ -1,0 +1,16 @@
+{
+  "name": "dates",
+  "version": "1.0.0",
+  "main": "src/main.ts",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "description": "A simple tool for converting dates and times across multiple timezones",
+  "scripts": {
+    "build": "tsc && rm -rf public && mkdir -p public && cp index.html styles.css public/ && cp -r dist public/",
+    "dev": "tsc --watch",
+    "serve": "serve public",
+    "serve:python": "python3 -m http.server 8000"
+  },
+  "type": "module"
+}
