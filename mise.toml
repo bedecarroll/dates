@@ -1,0 +1,24 @@
+min_version = "2025.9.10"
+
+[tasks.install]
+description = "Install dependencies"
+run = "bun install"
+
+[tasks.lint]
+description = "Run oxlint, oxfmt check, and tsc"
+depends = ["install"]
+run = "bun run lint"
+
+[tasks.lint-fix]
+description = "Auto-fix lint and formatting issues"
+depends = ["install"]
+run = "bun run lint-fix"
+
+[tasks.build]
+description = "Type-check and build the site"
+depends = ["install"]
+run = "bun run build"
+
+[tasks.check]
+description = "Aggregate lint and build"
+depends = ["lint", "build"]

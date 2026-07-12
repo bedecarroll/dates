@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dates</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-bar">
+                <h1>Dates</h1>
+                <button id="theme-toggle-btn" class="theme-toggle-btn" aria-describedby="theme-help" title="Toggle Dark Mode">&#9728;&#65039;</button>
+            </div>
+            <div id="theme-help" class="sr-only">Switch between light and dark theme</div>
+            <p>Enter a date/time and up to four timezones to view the corresponding times in a customizable range.</p>
+            <p class="tz-note">Timezones are saved in your browser. Click any timezone to remove it, or use reset to clear all</p>
+            <p class="copy-note">💡 Click any timestamp in the table to copy it to your clipboard</p>
+        </header>
+        
+        <main>
+            <div class="input-section">
+                <label for="datetime-input">Enter date/time (e.g., "tomorrow at 3pm", "next Friday", "in 24 hours", "1609459200")</label>
+                <input type="text" id="datetime-input" placeholder="Enter natural language date/time..." aria-describedby="datetime-help">
+                <div id="datetime-help" class="sr-only">Enter natural language date and time expressions or Unix timestamps</div>
+            </div>
+            
+            <div class="timezone-section">
+                <label for="timezone-input">Add timezones:</label>
+                <input type="text" id="timezone-input" placeholder="Type timezone and press Enter..." aria-describedby="timezone-help" role="combobox" aria-autocomplete="list" aria-expanded="false">
+                <div id="timezone-help" class="sr-only">Type timezone name or abbreviation and press Enter to add. Use arrow keys to navigate suggestions.</div>
+                <button id="reset-timezones-btn" class="reset-btn" aria-describedby="reset-help">Reset Timezones</button>
+                <div id="reset-help" class="sr-only">Remove all selected timezones and reset to browser default</div>
+                <div id="timezone-list" class="timezone-list" aria-label="Selected timezones" role="list"></div>
+            </div>
+            
+            <div class="time-range-section">
+                <label>Time Range (hours from entered time):</label>
+                <div class="time-range-inputs">
+                    <div class="input-group">
+                        <label for="start-offset">Start</label>
+                        <input type="number" id="start-offset" value="-1" min="-24" max="24" step="0.25">
+                    </div>
+                    <div class="input-group">
+                        <label for="end-offset">End</label>
+                        <input type="number" id="end-offset" value="2" min="-24" max="24" step="0.25">
+                    </div>
+                    <div class="input-group">
+                        <label for="increment">Increment (min)</label>
+                        <input type="number" id="increment" value="15" min="5" max="60" step="5">
+                    </div>
+                </div>
+            </div>
+            
+            <button id="convert-btn" class="convert-btn" aria-describedby="convert-help">Show Times</button>
+            <div id="convert-help" class="sr-only">Show the date/time across all selected timezones</div>
+            
+            <div id="results" class="results-section">
+                <!-- Timeline visualization -->
+                <div id="timeline" class="timeline"></div>
+                <!-- Table container for offset table -->
+                <div id="table-container" class="results-table-container"></div>
+                <!-- Conversion results list -->
+                <div id="conversion-list" class="conversion-list"></div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sugar@2.0.6/dist/sugar.min.js"></script>
+    <script type="module" src="dist/main.js"></script>
+</body>
+</html>
