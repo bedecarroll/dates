@@ -9,7 +9,7 @@
   },
   "description": "A simple tool for converting dates and times across multiple timezones",
   "scripts": {
-    "build": "tsc && rm -rf dist && bun build src/main.ts --outdir dist --format esm && rm -rf public && mkdir -p public && cp index.html styles.css public/ && cp -r dist public/",
+    "build": "tsc && bun build src/main.ts --outdir dist --format esm && mkdir -p public/dist && cp index.html styles.css public/ && cp dist/main.js public/dist/",
     "dev": "bun build src/main.ts --outdir dist --format esm --watch",
     "serve": "serve public",
     "serve:python": "python3 -m http.server 8000",
